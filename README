@@ -1,0 +1,12 @@
+
+
+This archive contains the distribution Dist-Zilla-Plugin-Repository, version
+0.01:
+
+  Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
+
+This software is copyright (c) 2009 by Fayland Lam.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as perl itself.
+
