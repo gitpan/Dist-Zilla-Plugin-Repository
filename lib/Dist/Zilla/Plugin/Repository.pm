@@ -52,6 +52,14 @@ sub _find_repo {
             # XXX Make it public clone URL, but this only works with github
             my $git_url = $1;
             $git_url =~ s![\w\-]+\@([^:]+):!git://$1/!;
+
+            # Changed
+            # I prefer http://github.com/fayland/dist-zilla-plugin-repository
+            #   than git://github.com/fayland/dist-zilla-plugin-repository.git
+            if ( $git_url =~ /^git:\/\/(github\.com.*?)\.git$/ ) {
+                $git_url = "http://$1/tree";
+            }
+
             return $git_url;
         }
         elsif ( `git svn info` =~ /URL: (.*)$/m ) {
@@ -102,7 +110,7 @@ no Moose;
 
 1;
 
-=pod
+__END__
 
 =head1 NAME
 
@@ -110,35 +118,16 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.01
-
-=head1 NAME
-
-Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
-
-=head1 VERSION
-
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
-      # dist.ini
-      [Repository]
+    # dist.ini
+    [Repository]
 
 =head1 DESCRIPTION
 
 The code is mostly a copy-paste of L<Module::Install::Repository>
-
-=head1 AUTHOR
-
-    Fayland Lam <fayland@gmail.com>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2009 by Fayland Lam.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as perl itself.
 
 =head1 AUTHOR
 
@@ -150,7 +139,3 @@ This software is copyright (c) 2009 by Fayland Lam.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
-
-=cut 
-
-__END__

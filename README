@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Dist-Zilla-Plugin-Repository, version
-0.01:
+0.02:
 
   Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
