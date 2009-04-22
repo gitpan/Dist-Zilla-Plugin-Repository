@@ -3,47 +3,18 @@ package Dist::Zilla::Plugin::Repository;
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
 use Moose;
-use Moose::Autobox;
-with 'Dist::Zilla::Role::InstallTool';
+with 'Dist::Zilla::Role::MetaProvider';
 
-use Dist::Zilla::File::InMemory;
-
-sub setup_installer {
+sub metadata {
     my ( $self, $arg ) = @_;
 
-    # check if [MetaYaml] is there
-    my $has_metayml = $self->zilla->plugins->grep(
-        sub { ref $_ eq 'Dist::Zilla::Plugin::MetaYaml' } )->length;
-    if ($has_metayml) {
-
-        my $repo = _find_repo();
-        unless ($repo) {
-            $self->zilla->log("[Repository] Cannot determine repository URL");
-            return 0;
-        }
-
-        my $file =
-          $self->zilla->files->grep( sub { $_->name =~ m{META\.yml\z} } )->head;
-
-        if ($file) {
-            my $content = $file->content;
-            require YAML::Syck;
-            my $meta = YAML::Syck::Load($content);
-            $meta->{resources}{repository} = $repo;
-            $file->content( YAML::Syck::Dump($meta) );
-        }
-        else {
-            $self->zilla->log(
-"[Repository] Skip META.yml ([Repository] needs after [MetaYaml]"
-            );
-        }
-    }
-
-    return;
+    my $repo = $self->_find_repo();
+    return { resources => { repository => $repo } };
 }
 
 # Copy-Paste of Module-Install-Repository, thank MIYAGAWA
 sub _find_repo {
+    my ($self) = @_;
     if ( -e ".git" ) {
 
         # TODO support remote besides 'origin'?
@@ -118,7 +89,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -129,13 +100,14 @@ version 0.03
 
 The code is mostly a copy-paste of L<Module::Install::Repository>
 
-=head1 AUTHOR
+=head1 AUTHORS
 
   Fayland Lam <fayland@gmail.com>
+  Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Fayland Lam.
+This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
