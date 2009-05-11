@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.05
+    version 0.06
 
 SYNOPSIS
         # dist.ini
@@ -12,8 +12,9 @@ SYNOPSIS
 DESCRIPTION
     The code is mostly a copy-paste of Module::Install::Repository
 
-AUTHOR
-      Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>
+AUTHORS
+      Fayland Lam <fayland@gmail.com>
+      Ricardo SIGNES <rjbs@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.

@@ -1,7 +1,8 @@
 --- 
 abstract: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 author: 
-  - Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>
+  - Fayland Lam <fayland@gmail.com>
+  - Ricardo SIGNES <rjbs@cpan.org>
 generated_by: Dist::Zilla::Plugin::MetaYaml version 1.091260
 license: perl
 name: Dist-Zilla-Plugin-Repository
@@ -9,4 +10,4 @@ requires:
   Dist::Zilla: 1.007
 resources: 
   repository: http://github.com/fayland/dist-zilla-plugin-repository/tree
-version: 0.05
+version: 0.06
