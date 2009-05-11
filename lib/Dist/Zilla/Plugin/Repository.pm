@@ -1,4 +1,5 @@
 package Dist::Zilla::Plugin::Repository;
+our $VERSION = '0.05';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -89,7 +90,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -100,10 +101,9 @@ version 0.04
 
 The code is mostly a copy-paste of L<Module::Install::Repository>
 
-=head1 AUTHORS
+=head1 AUTHOR
 
-  Fayland Lam <fayland@gmail.com>
-  Ricardo SIGNES <rjbs@cpan.org>
+  Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

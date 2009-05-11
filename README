@@ -1,12 +1,23 @@
+NAME
+    Dist::Zilla::Plugin::Repository - Automatically sets repository URL from
+    svn/svk/Git checkout for Dist::Zilla
 
+VERSION
+    version 0.05
 
-This archive contains the distribution Dist-Zilla-Plugin-Repository, version
-0.04:
+SYNOPSIS
+        # dist.ini
+        [Repository]
 
-  Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
+DESCRIPTION
+    The code is mostly a copy-paste of Module::Install::Repository
 
-This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
+AUTHOR
+      Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>
 
-This is free software; you can redistribute it and/or modify it under
-the same terms as perl itself.
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as perl itself.
 
