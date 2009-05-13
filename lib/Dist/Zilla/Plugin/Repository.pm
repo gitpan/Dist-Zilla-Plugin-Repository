@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -19,7 +19,7 @@ sub _find_repo {
     if ( -e ".git" ) {
 
         # TODO support remote besides 'origin'?
-        if ( `git remote show origin` =~ /URL: (.*)$/m ) {
+        if ( `git remote show -n origin` =~ /URL: (.*)$/m ) {
 
             # XXX Make it public clone URL, but this only works with github
             my $git_url = $1;
@@ -90,7 +90,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

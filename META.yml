@@ -10,4 +10,4 @@ requires:
   Dist::Zilla: 1.007
 resources: 
   repository: http://github.com/fayland/dist-zilla-plugin-repository/tree
-version: 0.06
+version: 0.07
