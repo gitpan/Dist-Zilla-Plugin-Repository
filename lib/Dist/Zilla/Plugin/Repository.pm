@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -9,17 +9,23 @@ with 'Dist::Zilla::Role::MetaProvider';
 sub metadata {
     my ( $self, $arg ) = @_;
 
-    my $repo = $self->_find_repo();
+    my $repo = $self->_find_repo( \&_execute );
     return { resources => { repository => $repo } };
+}
+
+sub _execute {
+    my ($command) = @_;
+    `$command`;
 }
 
 # Copy-Paste of Module-Install-Repository, thank MIYAGAWA
 sub _find_repo {
-    my ($self) = @_;
+    my ( $self, $execute ) = @_;
+
     if ( -e ".git" ) {
 
         # TODO support remote besides 'origin'?
-        if ( `git remote show -n origin` =~ /URL: (.*)$/m ) {
+        if ( $execute->('git remote show -n origin') =~ /URL: (.*)$/m ) {
 
             # XXX Make it public clone URL, but this only works with github
             my $git_url = $1;
@@ -34,19 +40,19 @@ sub _find_repo {
 
             return $git_url;
         }
-        elsif ( `git svn info` =~ /URL: (.*)$/m ) {
+        elsif ( $execute->('git svn info') =~ /URL: (.*)$/m ) {
             return $1;
         }
     }
     elsif ( -e ".svn" ) {
-        if ( `svn info` =~ /URL: (.*)$/m ) {
+        if ( $execute->('svn info') =~ /URL: (.*)$/m ) {
             return $1;
         }
     }
     elsif ( -e "_darcs" ) {
 
         # defaultrepo is better, but that is more likely to be ssh, not http
-        if ( my $query_repo = `darcs query repo` ) {
+        if ( my $query_repo = $execute->('darcs query repo') ) {
             if ( $query_repo =~ m!Default Remote: (http://.+)! ) {
                 return $1;
             }
@@ -58,17 +64,24 @@ sub _find_repo {
             return $_ if m!^http://!;
         }
     }
+    elsif ( -e ".hg" ) {
+        if ( $execute->('hg paths') =~ /default = (.*)$/m ) {
+            my $mercurial_url = $1;
+            $mercurial_url =~ s!^ssh://hg\@(bitbucket\.org/)!https://$1!;
+            return $mercurial_url;
+        }
+    }
     elsif ( -e "$ENV{HOME}/.svk" ) {
 
         # Is there an explicit way to check if it's an svk checkout?
-        my $svk_info = `svk info` or return;
+        my $svk_info = $execute->('svk info') or return;
       SVK_INFO: {
             if ( $svk_info =~ /Mirrored From: (.*), Rev\./ ) {
                 return $1;
             }
 
             if ( $svk_info =~ m!Merged From: (/mirror/.*), Rev\.! ) {
-                $svk_info = `svk info /$1` or return;
+                $svk_info = $execute->("svk info /$1") or return;
                 redo SVK_INFO;
             }
         }
@@ -90,7 +103,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
