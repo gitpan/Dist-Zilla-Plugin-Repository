@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -46,7 +46,11 @@ sub _find_repo {
     }
     elsif ( -e ".svn" ) {
         if ( $execute->('svn info') =~ /URL: (.*)$/m ) {
-            return $1;
+            my $svn_url = $1;
+            if ( $svn_url =~ /^https(\:\/\/.*?\.googlecode\.com\/svn\/.*)$/ ) {
+                $svn_url = 'http' . $1;
+            }
+            return $svn_url;
         }
     }
     elsif ( -e "_darcs" ) {
@@ -103,7 +107,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -118,6 +122,7 @@ The code is mostly a copy-paste of L<Module::Install::Repository>
 
   Fayland Lam <fayland@gmail.com>
   Ricardo SIGNES <rjbs@cpan.org>
+  Moritz Onken <onken@netcubed.de>
 
 =head1 COPYRIGHT AND LICENSE
 

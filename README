@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.08
+    version 0.09
 
 SYNOPSIS
         # dist.ini
@@ -15,6 +15,7 @@ DESCRIPTION
 AUTHORS
       Fayland Lam <fayland@gmail.com>
       Ricardo SIGNES <rjbs@cpan.org>
+      Moritz Onken <onken@netcubed.de>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
