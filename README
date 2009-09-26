@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.09
+    version 0.10
 
 SYNOPSIS
         # dist.ini
@@ -22,4 +22,9 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as perl itself.
+
+ATTRIBUTES
+  git_remote
+    This is the name of the remote to use for the public repository (if you
+    use Git). By default, unsurprisingly, to origin.
 

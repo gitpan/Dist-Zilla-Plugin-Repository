@@ -1,10 +1,16 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
 use Moose;
 with 'Dist::Zilla::Role::MetaProvider';
+
+has git_remote => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'origin',
+);
 
 sub metadata {
     my ( $self, $arg ) = @_;
@@ -23,9 +29,9 @@ sub _find_repo {
     my ( $self, $execute ) = @_;
 
     if ( -e ".git" ) {
-
-        # TODO support remote besides 'origin'?
-        if ( $execute->('git remote show -n origin') =~ /URL: (.*)$/m ) {
+        if ( $execute->( 'git remote show -n ' . $self->git_remote ) =~
+            /URL: (.*)$/m )
+        {
 
             # XXX Make it public clone URL, but this only works with github
             my $git_url = $1;
@@ -35,7 +41,7 @@ sub _find_repo {
             # I prefer http://github.com/fayland/dist-zilla-plugin-repository
             #   than git://github.com/fayland/dist-zilla-plugin-repository.git
             if ( $git_url =~ /^git:\/\/(github\.com.*?)\.git$/ ) {
-                $git_url = "http://$1/tree";
+                $git_url = "http://$1";
             }
 
             return $git_url;
@@ -107,7 +113,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -130,3 +136,10 @@ This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
+
+=head1 ATTRIBUTES
+
+=head2 git_remote
+
+This is the name of the remote to use for the public repository (if
+you use Git). By default, unsurprisingly, to F<origin>.

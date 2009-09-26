@@ -4,7 +4,7 @@ author:
   - 'Fayland Lam <fayland@gmail.com>'
   - 'Ricardo SIGNES <rjbs@cpan.org>'
   - 'Moritz Onken <onken@netcubed.de>'
-generated_by: 'Dist::Zilla::Plugin::MetaYAML version 1.092200'
+generated_by: 'Dist::Zilla::Plugin::MetaYAML version 1.092450'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -14,4 +14,4 @@ requires:
   Dist::Zilla: 1.007
 resources:
   repository: http://github.com/fayland/dist-zilla-plugin-repository/tree
-version: 0.09
+version: 0.10
