@@ -1,5 +1,5 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -113,7 +113,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -123,6 +123,17 @@ version 0.10
 =head1 DESCRIPTION
 
 The code is mostly a copy-paste of L<Module::Install::Repository>
+
+=head2 ATTRIBUTES
+
+=over 4
+
+=item * git_remote
+
+This is the name of the remote to use for the public repository (if
+you use Git). By default, unsurprisingly, to F<origin>.
+
+=back
 
 =head1 AUTHORS
 
@@ -136,10 +147,3 @@ This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
-
-=head1 ATTRIBUTES
-
-=head2 git_remote
-
-This is the name of the remote to use for the public repository (if
-you use Git). By default, unsurprisingly, to F<origin>.

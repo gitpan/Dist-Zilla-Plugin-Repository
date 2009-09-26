@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.10
+    version 0.11
 
 SYNOPSIS
         # dist.ini
@@ -11,6 +11,12 @@ SYNOPSIS
 
 DESCRIPTION
     The code is mostly a copy-paste of Module::Install::Repository
+
+  ATTRIBUTES
+    *   git_remote
+
+        This is the name of the remote to use for the public repository (if
+        you use Git). By default, unsurprisingly, to origin.
 
 AUTHORS
       Fayland Lam <fayland@gmail.com>
@@ -22,9 +28,4 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as perl itself.
-
-ATTRIBUTES
-  git_remote
-    This is the name of the remote to use for the public repository (if you
-    use Git). By default, unsurprisingly, to origin.
 
