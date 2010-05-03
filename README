@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.11
+    version 0.12
 
 SYNOPSIS
         # dist.ini
@@ -18,13 +18,22 @@ DESCRIPTION
         This is the name of the remote to use for the public repository (if
         you use Git). By default, unsurprisingly, to origin.
 
+    *   github_http
+
+        If the remote is a GitHub repository, uses the http url
+        (http://github.com/fayland/dist-zilla-plugin-repository) rather than
+        the actual clonable url
+        (git://github.com/fayland/dist-zilla-plugin-repository.git).
+        Defaults to true.
+
 AUTHORS
       Fayland Lam <fayland@gmail.com>
       Ricardo SIGNES <rjbs@cpan.org>
       Moritz Onken <onken@netcubed.de>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
+    This software is copyright (c) 2010 by Fayland Lam, Ricardo SIGNES,
+    Moritz Onken.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as perl itself.

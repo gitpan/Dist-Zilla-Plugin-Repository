@@ -1,5 +1,8 @@
 package Dist::Zilla::Plugin::Repository;
-our $VERSION = '0.11';
+
+BEGIN {
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.12';
+}
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
@@ -10,6 +13,12 @@ has git_remote => (
     is      => 'ro',
     isa     => 'Str',
     default => 'origin',
+);
+
+has github_http => (
+    is      => 'ro',
+    isa     => 'Bool',
+    default => 1,
 );
 
 sub metadata {
@@ -40,10 +49,13 @@ sub _find_repo {
             # Changed
             # I prefer http://github.com/fayland/dist-zilla-plugin-repository
             #   than git://github.com/fayland/dist-zilla-plugin-repository.git
-            if ( $git_url =~ /^git:\/\/(github\.com.*?)\.git$/ ) {
+            if (   $self->github_http
+                && $git_url =~ /^git:\/\/(github\.com.*?)\.git$/ )
+            {
                 $git_url = "http://$1";
             }
 
+            return if $git_url eq 'origin';    # RT 55136
             return $git_url;
         }
         elsif ( $execute->('git svn info') =~ /URL: (.*)$/m ) {
@@ -107,13 +119,15 @@ no Moose;
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -133,6 +147,13 @@ The code is mostly a copy-paste of L<Module::Install::Repository>
 This is the name of the remote to use for the public repository (if
 you use Git). By default, unsurprisingly, to F<origin>.
 
+=item * github_http
+
+If the remote is a GitHub repository, uses the http url
+(http://github.com/fayland/dist-zilla-plugin-repository) rather than the actual
+clonable url (git://github.com/fayland/dist-zilla-plugin-repository.git).
+Defaults to true.
+
 =back
 
 =head1 AUTHORS
@@ -143,7 +164,9 @@ you use Git). By default, unsurprisingly, to F<origin>.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Fayland Lam, Ricardo SIGNES.
+This software is copyright (c) 2010 by Fayland Lam, Ricardo SIGNES, Moritz Onken.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as perl itself.
+
+=cut
