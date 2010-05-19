@@ -7,7 +7,7 @@ author:
 build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.31
-generated_by: 'Dist::Zilla version 2.101170'
+generated_by: 'Dist::Zilla version 2.101310'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +15,7 @@ meta-spec:
 name: Dist-Zilla-Plugin-Repository
 recommends: {}
 requires:
-  Dist::Zilla: 1.007
+  Dist::Zilla: 2.101310
 resources:
   repository: http://github.com/fayland/dist-zilla-plugin-repository
-version: 0.12
+version: 0.13

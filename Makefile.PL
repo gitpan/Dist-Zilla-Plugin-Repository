@@ -9,24 +9,24 @@ use ExtUtils::MakeMaker 6.31;
 
 
 my %WriteMakefileArgs = (
-                       'test' => {
-                                   'TESTS' => 't/*.t'
-                                 },
-                       'NAME' => 'Dist::Zilla::Plugin::Repository',
-                       'DISTNAME' => 'Dist-Zilla-Plugin-Repository',
-                       'CONFIGURE_REQUIRES' => {
-                                                 'ExtUtils::MakeMaker' => '6.31'
-                                               },
-                       'AUTHOR' => 'Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>, Moritz Onken <onken@netcubed.de>',
-                       'BUILD_REQUIRES' => {},
-                       'ABSTRACT' => 'Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla',
-                       'EXE_FILES' => [],
-                       'VERSION' => '0.12',
-                       'PREREQ_PM' => {
-                                        'Dist::Zilla' => '1.007'
-                                      },
-                       'LICENSE' => 'perl'
-                     );
+  'ABSTRACT' => 'Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla',
+  'AUTHOR' => 'Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>, Moritz Onken <onken@netcubed.de>',
+  'BUILD_REQUIRES' => {},
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'Dist-Zilla-Plugin-Repository',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'Dist::Zilla::Plugin::Repository',
+  'PREREQ_PM' => {
+    'Dist::Zilla' => '2.101310'
+  },
+  'VERSION' => '0.13',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
 
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {

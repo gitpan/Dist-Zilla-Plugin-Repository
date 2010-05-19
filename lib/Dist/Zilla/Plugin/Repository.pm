@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::Repository;
 
 BEGIN {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.12';
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.13';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -25,7 +25,7 @@ sub metadata {
     my ( $self, $arg ) = @_;
 
     my $repo = $self->_find_repo( \&_execute );
-    return { resources => { repository => $repo } };
+    return { resources => { repository => { url => $repo } } };
 }
 
 sub _execute {
@@ -127,7 +127,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
