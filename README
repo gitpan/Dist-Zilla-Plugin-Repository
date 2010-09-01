@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.13
+    version 0.14
 
 SYNOPSIS
         # dist.ini
@@ -26,15 +26,26 @@ DESCRIPTION
         (git://github.com/fayland/dist-zilla-plugin-repository.git).
         Defaults to true.
 
+    *   repository
+
+        You can set this attribute if you want a specific repository instead
+        of the plugin to auto-identify your repository.
+
+        An example would be if you're releasing a module from your fork, and
+        you don't want it to identify your fork, so you can specify the
+        repository explicitly.
+
 AUTHORS
-      Fayland Lam <fayland@gmail.com>
-      Ricardo SIGNES <rjbs@cpan.org>
-      Moritz Onken <onken@netcubed.de>
+    *   Fayland Lam <fayland@gmail.com>
+
+    *   Ricardo SIGNES <rjbs@cpan.org>
+
+    *   Moritz Onken <onken@netcubed.de>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2010 by Fayland Lam, Ricardo SIGNES,
     Moritz Onken.
 
     This is free software; you can redistribute it and/or modify it under
-    the same terms as perl itself.
+    the same terms as the Perl 5 programming language system itself.
 

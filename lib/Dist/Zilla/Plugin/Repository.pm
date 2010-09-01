@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::Repository;
 
 BEGIN {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.13';
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.14';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -21,10 +21,21 @@ has github_http => (
     default => 1,
 );
 
+has 'repository' => (
+    is         => 'ro',
+    isa        => 'Str',
+    lazy_build => 1,
+);
+
+sub _build_repository {
+    my $self = shift;
+    return $self->_find_repo( \&_execute );
+}
+
 sub metadata {
     my ( $self, $arg ) = @_;
 
-    my $repo = $self->_find_repo( \&_execute );
+    my $repo = $self->repository;
     return { resources => { repository => { url => $repo } } };
 }
 
@@ -127,7 +138,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -154,19 +165,39 @@ If the remote is a GitHub repository, uses the http url
 clonable url (git://github.com/fayland/dist-zilla-plugin-repository.git).
 Defaults to true.
 
+=item * repository
+
+You can set this attribute if you want a specific repository instead of the
+plugin to auto-identify your repository.
+
+An example would be if you're releasing a module from your fork, and you don't
+want it to identify your fork, so you can specify the repository explicitly.
+
 =back
 
 =head1 AUTHORS
 
-  Fayland Lam <fayland@gmail.com>
-  Ricardo SIGNES <rjbs@cpan.org>
-  Moritz Onken <onken@netcubed.de>
+=over 4
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Ricardo SIGNES <rjbs@cpan.org>
+
+=item *
+
+Moritz Onken <onken@netcubed.de>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2010 by Fayland Lam, Ricardo SIGNES, Moritz Onken.
 
 This is free software; you can redistribute it and/or modify it under
-the same terms as perl itself.
+the same terms as the Perl 5 programming language system itself.
 
 =cut
