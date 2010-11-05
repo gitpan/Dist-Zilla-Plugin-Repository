@@ -7,5 +7,7 @@ README
 dist.ini
 lib/Dist/Zilla/Plugin/Repository.pm
 t/00-load.t
+t/10-repo.t
+t/corpus/DZT/lib/DZT/Sample.pm
 t/release-pod-coverage.t
 t/release-pod-syntax.t

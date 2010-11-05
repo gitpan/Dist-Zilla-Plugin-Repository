@@ -10,8 +10,11 @@ use ExtUtils::MakeMaker 6.31;
 
 my %WriteMakefileArgs = (
   'ABSTRACT' => 'Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla',
-  'AUTHOR' => 'Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>, Moritz Onken <onken@netcubed.de>',
-  'BUILD_REQUIRES' => {},
+  'AUTHOR' => 'Fayland Lam <fayland@gmail.com>, Ricardo SIGNES <rjbs@cpan.org>, Moritz Onken <onken@netcubed.de>, Christopher J. Madsen',
+  'BUILD_REQUIRES' => {
+    'Dist::Zilla::Tester' => '4.102340',
+    'Test::More' => '0.88'
+  },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.31'
   },
@@ -22,7 +25,7 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Dist::Zilla' => '4.102340'
   },
-  'VERSION' => '0.14',
+  'VERSION' => '0.15',
   'test' => {
     'TESTS' => 't/*.t'
   }

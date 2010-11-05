@@ -4,18 +4,24 @@ author:
   - 'Fayland Lam <fayland@gmail.com>'
   - 'Ricardo SIGNES <rjbs@cpan.org>'
   - 'Moritz Onken <onken@netcubed.de>'
-build_requires: {}
+  - 'Christopher J. Madsen'
+build_requires:
+  Dist::Zilla::Tester: 4.102340
+  Test::More: 0.88
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.102340, CPAN::Meta::Converter version 2.102400'
+generated_by: 'Dist::Zilla version 4.102342, CPAN::Meta::Converter version 2.102400'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Dist-Zilla-Plugin-Repository
+no_index:
+  directory:
+    - t
 requires:
   Dist::Zilla: 4.102340
 resources:
   repository: http://github.com/fayland/dist-zilla-plugin-repository
-version: 0.14
+version: 0.15
