@@ -4,7 +4,7 @@ author:
   - 'Fayland Lam <fayland@gmail.com>'
   - 'Ricardo SIGNES <rjbs@cpan.org>'
   - 'Moritz Onken <onken@netcubed.de>'
-  - 'Christopher J. Madsen'
+  - 'Christopher J. Madsen <perl@cjmweb.net>'
 build_requires:
   Dist::Zilla::Tester: 4.102340
   Test::More: 0.88
@@ -24,4 +24,4 @@ requires:
   Dist::Zilla: 4.102340
 resources:
   repository: http://github.com/fayland/dist-zilla-plugin-repository
-version: 0.15
+version: 0.16
