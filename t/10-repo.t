@@ -3,7 +3,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 34;
+use Test::More;
 
 use Dist::Zilla::Tester;
 
@@ -11,6 +11,8 @@ use Dist::Zilla::Tester;
 # Fake execution of VCS commands:
 
 use Dist::Zilla::Plugin::Repository;    # make sure it's already loaded
+use File::Temp qw/tempdir/;
+local $ENV{HOME} = tempdir( CLEANUP => 1 );
 
 my %result;
 
@@ -125,6 +127,11 @@ sub build_tzil {
 sub github_deprecated {
     scalar grep { /github_http is deprecated/ } @{ shift->log_messages };
 }    # end github_deprecated
+
+#---------------------------------------------------------------------
+sub remote_not_found {
+    scalar grep { /Skipping invalid git remote/ } @{ shift->log_messages };
+}    # end remote_not_found
 
 #=====================================================================
 {
@@ -383,6 +390,23 @@ END GIT NOURL
     );
     ok( !github_deprecated($tzil),
         "Auto git remote nourl with repository log message" );
+}
+
+#---------------------------------------------------------------------
+$result{'git remote show -n github'} = <<'END GITHUB REMOTE NOT FOUND';
+* remote github
+  Fetch URL: github
+  Push  URL: github
+  HEAD branch: (not queried)
+  Remote branches: (status not queried)
+END GITHUB REMOTE NOT FOUND
+
+{
+    my $tzil = build_tzil( ['git_remote = github'], '.git' );
+
+    is( $tzil->distmeta->{resources}{repository},
+        undef, "Auto git remote github not found" );
+    ok( remote_not_found($tzil), "Auto git remote github not found" );
 }
 
 #---------------------------------------------------------------------

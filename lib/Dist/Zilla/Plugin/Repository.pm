@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::Repository;
 
 BEGIN {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.16';
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.17';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -119,6 +119,12 @@ sub _find_repo {
         elsif ( $execute->('git svn info') =~ /URL: (.*)$/m ) {
             %repo = ( qw(type svn  url), $1 );
         }
+
+        # invalid github remote might come back with just the remote name
+        if ( $repo{url} && $repo{url} =~ /\A\w+\z/ ) {
+            delete $repo{$_} for qw/url type web/;
+            $self->log( "Skipping invalid git remote " . $self->git_remote );
+        }
     }
     elsif ( -e ".svn" ) {
         $repo{type} = 'svn';
@@ -188,7 +194,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.16
+version 0.17
 
 =head1 SYNOPSIS
 
@@ -273,7 +279,7 @@ Christopher J. Madsen <perl@cjmweb.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
+This software is copyright (c) 2011 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
