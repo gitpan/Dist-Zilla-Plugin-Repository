@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::Repository;
 
 BEGIN {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.17';
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.18';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -100,7 +100,7 @@ sub _find_repo {
 
             $repo{url} = $git_url unless $git_url eq 'origin';    # RT 55136
 
-            if ( $git_url =~ /^git:\/\/(github\.com.*?)\.git$/ ) {
+            if ( $git_url =~ /^(?:git|https?):\/\/(github\.com.*?)\.git$/ ) {
                 $repo{web} = "http://$1";
 
                 if ( $self->github_http ) {
@@ -194,7 +194,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 
