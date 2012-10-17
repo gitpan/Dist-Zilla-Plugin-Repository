@@ -3,7 +3,7 @@ NAME
     svn/svk/Git checkout for Dist::Zilla
 
 VERSION
-    version 0.18
+    version 0.19
 
 SYNOPSIS
         # dist.ini
@@ -21,9 +21,9 @@ DESCRIPTION
     *   github_http
 
         This attribute is deprecated. If the remote is a GitHub repository,
-        list only the http url
-        (http://github.com/fayland/dist-zilla-plugin-repository) and not the
-        actual clonable url
+        list only the https url
+        (https://github.com/fayland/dist-zilla-plugin-repository) and not
+        the actual clonable url
         (git://github.com/fayland/dist-zilla-plugin-repository.git). This
         used to default to true, but as of 0.16 it defaults to false.
 
@@ -68,7 +68,7 @@ AUTHORS
     *   Christopher J. Madsen <perl@cjmweb.net>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2011 by Fayland Lam, Ricardo SIGNES,
+    This software is copyright (c) 2012 by Fayland Lam, Ricardo SIGNES,
     Moritz Onken, Christopher J. Madsen.
 
     This is free software; you can redistribute it and/or modify it under

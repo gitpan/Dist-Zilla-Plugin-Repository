@@ -1,7 +1,6 @@
 package Dist::Zilla::Plugin::Repository;
-
-BEGIN {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.18';
+{
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.19';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -93,7 +92,6 @@ sub _find_repo {
         if ( $execute->( 'git remote show -n ' . $self->git_remote ) =~
             /URL: (.*)$/m )
         {
-
             # XXX Make it public clone URL, but this only works with github
             my $git_url = $1;
             $git_url =~ s![\w\-]+\@([^:]+):!git://$1/!;
@@ -101,11 +99,11 @@ sub _find_repo {
             $repo{url} = $git_url unless $git_url eq 'origin';    # RT 55136
 
             if ( $git_url =~ /^(?:git|https?):\/\/(github\.com.*?)\.git$/ ) {
-                $repo{web} = "http://$1";
+                $repo{web} = "https://$1";
 
                 if ( $self->github_http ) {
 
-                    # I prefer http://github.com/user/repository
+                    # I prefer https://github.com/user/repository
                     # to git://github.com/user/repository.git
                     delete $repo{url};
                     $self->log( "github_http is deprecated.  "
@@ -194,7 +192,7 @@ Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 
@@ -217,8 +215,8 @@ you use Git). By default, unsurprisingly, to F<origin>.
 =item * github_http
 
 B<This attribute is deprecated.>
-If the remote is a GitHub repository, list only the http url
-(http://github.com/fayland/dist-zilla-plugin-repository) and not the actual
+If the remote is a GitHub repository, list only the https url
+(https://github.com/fayland/dist-zilla-plugin-repository) and not the actual
 clonable url (git://github.com/fayland/dist-zilla-plugin-repository.git).
 This used to default to true, but as of 0.16 it defaults to false.
 
@@ -279,7 +277,7 @@ Christopher J. Madsen <perl@cjmweb.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
+This software is copyright (c) 2012 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
