@@ -1,6 +1,6 @@
 package Dist::Zilla::Plugin::Repository;
 {
-    $Dist::Zilla::Plugin::Repository::VERSION = '0.19';
+    $Dist::Zilla::Plugin::Repository::VERSION = '0.20';
 }
 
 # ABSTRACT: Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
@@ -78,6 +78,7 @@ sub metadata {
 
 sub _execute {
     my ($command) = @_;
+    $ENV{LC_ALL} = "C";
     `$command`;
 }
 
@@ -186,13 +187,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::Repository - Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 
@@ -277,7 +280,7 @@ Christopher J. Madsen <perl@cjmweb.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
+This software is copyright (c) 2014 by Fayland Lam, Ricardo SIGNES, Moritz Onken, Christopher J. Madsen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

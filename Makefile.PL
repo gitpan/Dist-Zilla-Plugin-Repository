@@ -11,10 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Automatically sets repository URL from svn/svk/Git checkout for Dist::Zilla",
   "AUTHOR" => "Fayland Lam <fayland\@gmail.com>, Ricardo SIGNES <rjbs\@cpan.org>, Moritz Onken <onken\@netcubed.de>, Christopher J. Madsen <perl\@cjmweb.net>",
-  "BUILD_REQUIRES" => {
-    "Dist::Zilla::Tester" => "4.102340",
-    "Test::More" => "0.88"
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -25,24 +22,28 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Dist::Zilla" => "4.102340"
   },
-  "VERSION" => "0.19",
+  "TEST_REQUIRES" => {
+    "Dist::Zilla::Tester" => "4.102340",
+    "Test::More" => "0.88"
+  },
+  "VERSION" => "0.20",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
-    }
-    else {
-      $pp->{$mod} = $br->{$mod};
-    }
-  }
+my %FallbackPrereqs = (
+  "Dist::Zilla" => "4.102340",
+  "Dist::Zilla::Tester" => "4.102340",
+  "Test::More" => "0.88"
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
 }
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
